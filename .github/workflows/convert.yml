@@ -1,0 +1,47 @@
+name: convert
+on:
+ push:
+ workflow_dispatch:
+
+#on: [push]
+#
+#on :
+#  repository_dispatch:
+#    types: [svn-fetch]
+
+
+
+jobs:
+  conv:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          key: ttssh2-cache
+          path: ttssh2
+      - name: install
+        shell: bash
+        run: |
+          sudo sed -i 's/azure\.//' /etc/apt/sources.list
+          sudo apt-get update
+          sudo apt-get remove -y git git-man
+          sudo apt-get install -y git git-svn
+      - name: git svn
+        shell: bash
+        run: |
+          pwd
+          ls -a
+          echo $GITHUB_SHA
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_WORKSPACE
+          bash convert.sh
+          ls
+          ls ttssh2/
+      - name: git_svn_tar
+        uses: actions/upload-artifact@v2
+        with:
+          name: git_svn_tar
+          path: ./ttssh2_git.tar.bz2
