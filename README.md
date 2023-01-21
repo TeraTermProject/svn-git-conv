@@ -3,8 +3,18 @@
 - git-svn clone に時間がかかるのでclone済みファイルツリーを保存
 - OSDN 上のソース,リポジトリ(svn)のバックアップ
 - git へミラーを作成するための元データ
+- git へ push
 
 ## 使い方
+
+### gitへpush
+
+次の値をセットしておくと push する
+- secrets.GIT_REPOSITORY
+- vars.GIT_USER_NAME
+- vars.GIT_USER_EMAIL
+
+### artifact
 
 - ttssh2_git.tar.bz2 をダウンロード、展開する
 - ttssh2/ がソースツリーとしてそのまま使える
