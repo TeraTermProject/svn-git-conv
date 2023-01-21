@@ -7,6 +7,9 @@ else
 	git svn clone https://svn.osdn.net/svnroot/ttssh2/ --stdlayout --authors-file=authors.txt --prefix=svn/ -r 3226:HEAD --log-window-size=10000
 	cd ttssh2/
 fi
+git switch master
+git pull origin master
+git branch | grep -v '*' | xargs git branch -D
 git for-each-ref --format='%(refname:lstrip=4)' refs/remotes/svn/tags | xargs -I{} git tag {} svn/tags/{}
 git for-each-ref --format='%(refname:lstrip=3)' refs/remotes/svn | grep -v tags | xargs -I{} git branch {} svn/{}
 if [ -v GIT_REPOSITORY ] && [ -v GIT_USER_NAME ] && [ -v GIT_USER_EMAIL ]; then
