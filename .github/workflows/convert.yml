@@ -2,6 +2,10 @@
 on:
   push:
   workflow_dispatch:
+  schedule:
+    # See https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+    # This example triggers the workflow every day at 19:00 UTC(JST+0900 04:00, Note: 19+9-24=4):
+    - cron:  '0 19 * * *'
 
 jobs:
   create_mirror_gitsvn:
